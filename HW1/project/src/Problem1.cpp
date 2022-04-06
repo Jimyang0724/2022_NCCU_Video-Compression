@@ -29,7 +29,7 @@ auto Problem1::convertYCrCb444ToYCrCb422(const cv::Mat &img_ORI) {
 
     for(int i=0; i<height; i++) {
         for(int j=0; j<width; j++) {
-            cout<<planes[0][i][j]<<endl;
+            cout<<planes[0].at<uchar>(i,j)<<endl;
         }
     }
 
