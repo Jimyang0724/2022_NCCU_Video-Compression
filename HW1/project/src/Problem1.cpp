@@ -24,7 +24,16 @@ auto Problem1::convertYCrCb444ToYCrCb422(const cv::Mat &img_ORI) {
     cv::Mat img_420, img_YCrCb444;
     img_ORI.copyTo(img_YCrCb444);
 
-    cout<<img_YCrCb444.at<cv::Vec3b>(10, 10)<<endl;
+    vector<cv::Mat1b> planes;
+    cv::split(img_YCrCb444, planes);
+
+    for(int i=0; i<height; i++) {
+        for(int j=0; j<width; j++) {
+            cout<<planes[0][i][j]<<endl;
+        }
+    }
+
+    // cout<<img_YCrCb444.at<cv::Vec3b>(10, 10)<<endl;
 
     cv::imshow("image copy", img_YCrCb444);
     cv::waitKey(0);
