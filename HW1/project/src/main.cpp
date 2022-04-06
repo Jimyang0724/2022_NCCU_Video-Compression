@@ -1,5 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include "opencv2/highgui/highgui_c.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include "Problem1.hpp"
 
@@ -14,6 +15,7 @@ int main(int argc, char const *argv[])
     cout << "Problem1_" << endl;
     Problem1 p1;
     p1.doProblem1(image_ORI);
+    
 
     return 0;
 }
