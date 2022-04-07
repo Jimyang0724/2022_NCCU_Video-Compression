@@ -1,5 +1,4 @@
 import cv2 
-import copy
 import numpy as np
 # /home/jimyang/Documents/nccu/1102/vc/VC2022_HW/HW1_python
 
@@ -16,5 +15,5 @@ def convertYUV444to422(img_ori):
     Cr_sub[1::2, :] = Cr_sub[::2, :] 
     Cr_sub[:, 1::2] = Cr_sub[:, ::2]
 
-    return cv2.merge([Y, Cr_sub, Cb_sub])
-    # return Y, Cr_sub, Cb_sub
+    # return cv2.merge([Y, Cr_sub, Cb_sub])
+    return cv2.merge([Y, Cr_sub, Cb_sub]), Y, Cr_sub, Cb_sub
