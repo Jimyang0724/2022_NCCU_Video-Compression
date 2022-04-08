@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 # /home/jimyang/Documents/nccu/1102/vc/VC2022_HW/HW1_python
 
-def convertYUV444to422(img_ori):
+def convertYUV444to420(img_ori):
     height, width = img_ori.shape[:2]
     Y, Cr, Cb = cv2.split(np.copy(img_ori))
 
