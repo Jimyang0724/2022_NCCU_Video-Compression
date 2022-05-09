@@ -65,8 +65,8 @@ def main():
     ref_frame_bgr = cv2.imread(os.path.join(SRC_FOLDER, 'foreman_qcif_0_rgb.bmp'))
     frame_bgr = cv2.imread(os.path.join(SRC_FOLDER, 'foreman_qcif_1_rgb.bmp'))
     
-    ref_frame_Y, ref_frame_Cr, ref_frame_Cb = cv2.split(cv2.cvtColor(ref_frame_bgr, cv2.COLOR_BGR2YCrCb))
-    frame_Y, frame_Cr, frame_Cb = cv2.split(cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2YCrCb))
+    ref_frame_Y, _, _ = cv2.split(cv2.cvtColor(ref_frame_bgr, cv2.COLOR_BGR2YCrCb))
+    frame_Y, _, _ = cv2.split(cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2YCrCb))
     
     cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'ref_frame.png'), ref_frame_Y)
     cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'cur_frame.png'), frame_Y)
@@ -74,7 +74,7 @@ def main():
     MVs = get_motionVector(ref_frame_Y, frame_Y)
     pred_frame = make_collage(ref_frame_Y, MVs)
     
-    cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'pred_frame.png'), pred_frame)
+    cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'collage_frame.png'), pred_frame)
 
 if __name__ == '__main__':
     main()

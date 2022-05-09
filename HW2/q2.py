@@ -17,7 +17,6 @@ def get_pred_modes(frame, block_size=16):
     modes = {0:-1}
     collage[0:block_size, 0:block_size] = 0
     
-    
     for h in range(0, height, block_size):
         for w in range(0, width, block_size):
 
@@ -98,11 +97,6 @@ def get_pred_modes(frame, block_size=16):
                     else:
                         print("Something Error!")
                         break
-                
-                # SAD_local = np.sum(np.abs(np.subtract(frame[h:h+block_size, w:w+block_size], ref_frame_border[h+i:h+i+block_size, w+j:w+j+block_size], dtype=np.int16)))
-                # if SAD_local <= SAD:
-                #     SAD = SAD_local
-                #     min_vector = ((h + i - block_size) - h, (w + j - block_size) - w)
                             
             modes[int((h / block_size) * (width / block_size) + (w / block_size))] = mode_to_use
             collage[h:h+block_size, w:w+block_size] = pred_block
@@ -136,7 +130,7 @@ def main():
     cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'frame.png'), frame_Y)
 
     collage, _ = get_pred_modes(frame_Y)    
-    cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'pred_frame.png'), collage)
+    cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'collage_frame.png'), collage)
 
 if __name__ == '__main__':
     main()
