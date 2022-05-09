@@ -1,6 +1,5 @@
 import os
 import cv2
-import copy
 import numpy as np
 
 SRC_FOLDER = './image_input'
@@ -11,13 +10,6 @@ def write_to_file(path, file):
     with open(path, 'w') as f:
         for index in file:
             f.write(f"Block {str(index)} – {str(file[index])}\n")
-    
-
-def crop_img(img, size_y, size_x):
-    h, w = img.shape
-    num_of_crops = (h/size_y) * (w/size_x)
-    crops = np.zeros((int(num_of_crops), size_y, size_x))
-    return crops
 
 def get_motionVector(ref_frame, frame, block_size=16):
     height, width = frame.shape[:2]
@@ -34,7 +26,6 @@ def get_motionVector(ref_frame, frame, block_size=16):
     
     for h in range(0, height, block_size):
         for w in range(0, width, block_size):
-            # block = frame[h:h+16, w:w+16]
 
             min_vector = (0, 0)
             SAD = np.inf
@@ -48,7 +39,6 @@ def get_motionVector(ref_frame, frame, block_size=16):
             MVs[int((h / block_size) * (width / block_size) + (w / block_size))] = min_vector
                     
 
-    # print(MVs)
     write_to_file(os.path.join(DST_FOLDER_TXT, "motion_vector.txt"), MVs)
     return MVs
 
@@ -71,7 +61,6 @@ def make_collage(ref_frame, MVs, block_size=16):
     
     return pred_frame
     
-
 def main():
     ref_frame_bgr = cv2.imread(os.path.join(SRC_FOLDER, 'foreman_qcif_0_rgb.bmp'))
     frame_bgr = cv2.imread(os.path.join(SRC_FOLDER, 'foreman_qcif_1_rgb.bmp'))
@@ -82,13 +71,10 @@ def main():
     cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'ref_frame.png'), ref_frame_Y)
     cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'cur_frame.png'), frame_Y)
 
-    
     MVs = get_motionVector(ref_frame_Y, frame_Y)
     pred_frame = make_collage(ref_frame_Y, MVs)
     
-    
     cv2.imwrite(os.path.join(DST_FOLDER_IMG, 'pred_frame.png'), pred_frame)
-    # print(crop_img)
 
 if __name__ == '__main__':
     main()
