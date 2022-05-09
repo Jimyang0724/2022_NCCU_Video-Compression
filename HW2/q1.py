@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 
 SRC_FOLDER = './image_input'
-DST_FOLDER_IMG = './image_output'
-DST_FOLDER_TXT = './txt_output'
+DST_FOLDER_IMG = './q1_output/image_output'
+DST_FOLDER_TXT = './q1_output/txt_output'
 
 def write_to_file(path, file):
     with open(path, 'w') as f:
